@@ -4,7 +4,7 @@ from pygame_widgets.slider import Slider
 from pygame_widgets.textbox import TextBox
 
 
-value = 100
+value = 10
 
 
 def main_menu():
@@ -69,6 +69,8 @@ def main_menu():
                                     run = 0
                         screen.blit(font.render("Volume level",
                                     True, (0, 0, 0)), (100, 100))
+                        screen.blit(font.render("press esc to close",
+                                                True, (0, 0, 0)), (10, 10))
                         pygame_widgets.update(events)
                         global value
                         value = slider.getValue()

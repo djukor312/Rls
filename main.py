@@ -195,7 +195,7 @@ def game_loop():
     score = 0
     wave = 1
     speed = 5
-    lives = 9999
+    lives = 3
     invincible_time = 0
     invincible_duration = 1000
 
