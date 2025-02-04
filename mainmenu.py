@@ -8,6 +8,7 @@ value = 10
 
 
 def main_menu():
+    #Основной экран
     font = pygame.font.Font(None, 36)
     screen = pygame.display.set_mode((700, 600))
     running = True
@@ -31,13 +32,14 @@ def main_menu():
         screen.blit(settigns, settigns_rect)
 
         pygame.display.flip()
-
+        # Обработка событий
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if start_button_rect.collidepoint(event.pos):
                     running = False
+                # Окно гайда управления
                 elif control_button_rect.collidepoint(event.pos):
                     instructions = "Use arrow keys to move space to jump esc to pause."
                     text = font.render(instructions, True, (0, 0, 0))
@@ -54,6 +56,7 @@ def main_menu():
                             if event.type == pygame.KEYDOWN:
                                 if event.key == pygame.K_ESCAPE:
                                     a = 1
+                # Окно насторек
                 elif settigns_rect.collidepoint(event.pos):
                     slider = Slider(screen, 100, 200, 200, 20, min=0, max=100)
                     level = TextBox(screen, 350, 200, 50, 30)
@@ -82,6 +85,6 @@ def main_menu():
                     running = False
                     quit()
 
-
+# Изменение громкости
 def change_volume():
     pygame.mixer.music.set_volume(value / 100)
