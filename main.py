@@ -29,7 +29,7 @@ def load_sprite(path, size):
     sprite = sprite.convert_alpha()
     return pygame.transform.scale(sprite, size)
 
-
+# Загрузка спрайтов
 player_sprite = load_sprite("data/player.png", (PLAYER_WIDTH, PLAYER_HEIGHT))
 obs_sprite = load_sprite(
     "data/obstacle.png", (OBSTACLE_WIDTH, OBSTACLE_HEIGHT))
@@ -143,13 +143,12 @@ def draw_game_over():
     )
 
 
-# Основной цикл игры
 green_square = None
 green_square_wave = 0
 blue_square = None
 blue_square_wave = 0
 
-
+# Обработка hp up'а
 def update_green_square():
     global green_square, lives
     if green_square:
@@ -160,7 +159,7 @@ def update_green_square():
             lives += 1
             green_square = None
 
-
+# Обработка павер апа неуязвимости
 def update_blue_square():
     global blue_square, invincible_time
     if blue_square:
@@ -171,7 +170,7 @@ def update_blue_square():
             invincible_time = pygame.time.get_ticks() + 10000  # 10 секунд неуязвимости
             blue_square = None
 
-
+# Основной цикл игры
 def game_loop():
     global green_sprite, blue_sprite, blue_square, blue_square_wave, green_square_wave, green_square, player_x, player_y, player_lane, is_jumping, jump_offset, jump_speed, obstacles, score, wave, speed, lives, invincible_time, invincible_duration, wave_sound, damage_sound, jump_sound, defeat_sound, background_y1, background_y2
     damage_sound = pygame.mixer.Sound("data/damage.mp3")
@@ -237,7 +236,7 @@ def game_loop():
                 jump_offset = 0
                 jump_speed = abs(jump_speed)
                 is_jumping = False
-
+        #Обработка частоты появления препятствий
         if len(obstacles) == 0 or obstacles[-1].y > OBSTACLE_HEIGHT + 10:
             lane = random.randint(0, 2)
             obs_x = lane * LANE_WIDTH + LANE_WIDTH // 2 - OBSTACLE_WIDTH // 2
@@ -265,7 +264,7 @@ def game_loop():
 
         lives_text = font.render(f"Lives: {lives}", True, BLACK)
         screen.blit(lives_text, (10, HEIGHT - 40))
-
+        #Проверка условий для появления hp up'a
         if wave % 2 == 0 and green_square is None and green_square_wave != wave:
             green_square = pygame.Rect(
                 random.choice([0, LANE_WIDTH, 2 * LANE_WIDTH]) +
@@ -275,7 +274,7 @@ def game_loop():
                 40,
             )
             green_square_wave = wave
-
+        #Проверка условий для появления неуязвимости
         if wave % 3 == 0 and blue_square is None and blue_square_wave != wave:
             blue_square = pygame.Rect(
                 random.choice([0, LANE_WIDTH, 2 * LANE_WIDTH]) +
